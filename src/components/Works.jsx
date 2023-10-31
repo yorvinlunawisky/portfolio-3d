@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import WebDesign from "./WebDesign";
+import Development from "./Development";
+import ProductDesign from "./ProductDesign";
 
 const data = [
   "Web Design",
@@ -60,7 +63,7 @@ const ListItem = styled.li`
   @media only screen and (max-width: 768px) {
     font-size: 24px;
     color: white;
-    -webkit-text-stroke: 0px;
+    -webkit-text-stroke: 1px #9f1193;
   }
 
   ::after {
@@ -91,21 +94,31 @@ const Right = styled.div`
   flex: 1;
 `;
 const Works = () => {
+  const [work, setWork] = useState("Web Design");
   return (
-    <Section>
-      <Container>
-        <Left>
-          <List>
-            {data.map((item) => (
-              <ListItem key={item} text={item}>
-                {item}
-              </ListItem>
-            ))}
-          </List>
-        </Left>
-        <Right></Right>
-      </Container>
-    </Section>
+      <Section>
+        <Container>
+          <Left>
+            <List>
+              {data.map((item) => (
+                  <ListItem key={item} text={item} onClick={() => setWork(item)}>
+                    {item}
+                  </ListItem>
+              ))}
+            </List>
+          </Left>
+          <Right>
+            {work === "Web Design" ? (
+                <WebDesign />
+            ) : work === "Development" ? (
+                <Development />
+            ) : (
+                <ProductDesign />
+            )}
+
+          </Right>
+        </Container>
+      </Section>
   );
 };
 
